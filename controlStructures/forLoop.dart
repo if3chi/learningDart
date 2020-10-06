@@ -3,13 +3,13 @@ main() {
 
   // methods
 
-  // for (var n in scores) {
-  //   print(n);
-  // }
-  // print('method 2');
-  // for (int i = 0; i < scores.length; i++) {
-  //   print(scores[i]);
-  // }
+  for (var n in scores) {
+    print(n);
+  }
 
-  print(3 << 3);
+  print('method 2');
+
+  for (int i = 0; i < scores.length; i++) {
+    print(scores[i]);
+  }
 }

@@ -11,4 +11,24 @@ main() {
       print(i);
     }
   }
+
+// break and continue with labels
+
+  myLabel:
+  for (var n in numbers) {
+    for (int i = 1; i < n; i++) {
+      if (n == 45) {
+        print('continue at $n : $i');
+        continue myLabel;
+      } else if (i == 2) {
+        continue;
+      } else if (i == 10) {
+        break;
+      } else if (n == 100) {
+        print('break at $n : $i');
+        break myLabel;
+      }
+      print(i);
+    }
+  }
 }

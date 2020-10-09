@@ -16,4 +16,10 @@ main() {
   int result = a > b ? a * b : b ~/ a;
 
   print(result);
+
+  // conditional expression exp1 ?? exp2; returns non-null value
+
+  String empty = null;
+
+  print('${empty ?? "I show up because it's null"}');
 }

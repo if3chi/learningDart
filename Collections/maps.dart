@@ -1,8 +1,14 @@
+//
+
 main() {
   // ways to create a Map
 
   var africa = {'nigeria': 'Abuja', 'ghana': 'Accra', 'Egypt': 'Cairo'};
   var africa2 = Map();
+  Map<String, int> countryDialCode = Map();
+
+  countryDialCode['nigeria'] = 234;
+  countryDialCode['ghana'] = 233;
 
   africa2.addAll({'other': 'Countries'});
   africa2.addAll({'Main': 'Methods'});
@@ -11,6 +17,9 @@ main() {
 
   print(africa2);
   print(africa);
+  print(countryDialCode);
+
+  countryDialCode.forEach((key, value) => print('$key : $value'));
 
 // manipulating Maps
   print('\nAll Keys in Africa ${africa.keys}');

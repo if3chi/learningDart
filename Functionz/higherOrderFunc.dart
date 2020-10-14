@@ -8,9 +8,26 @@ List<int> forAll(Function f, List<int> intList) {
   return newList;
 }
 
-int factorial(int n) {
-  return n == 1 ? 1 : n * factorial(n - 1);
+Function addListNums(list) {
+  var sum = 0;
+  for (var n in list) {
+    sum += n;
+  }
+
+  print(sum);
 }
+
+Function taskToPerform(list) => addListNums(list);
+
+// using fat arrow
+int factorial(int n) => n == 1 ? 1 : n * factorial(n - 1);
+
+// thesame thing, just different way of creating lambda Functions
+Function addTwoNums = (int x, int y) => print(x + y);
+
+var add2Nums = (int x, int y) {
+  return x + y;
+};
 
 main(List<String> args) {
   var numList = [
@@ -24,4 +41,9 @@ main(List<String> args) {
 
   // using forAll I created to print the factorials of the items in the list
   print(forAll(factorial, numList));
+
+  addTwoNums(23, 89);
+  print(add2Nums(23, 89));
+
+  taskToPerform([1, 2, 4, 5, 6, 6, 6089]);
 }

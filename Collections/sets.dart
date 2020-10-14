@@ -1,4 +1,5 @@
 main() {
+  Set<String> setOfFruitss = Set();
   var setOfFruits = <String>{
     'apples',
     'bananas',
@@ -8,11 +9,15 @@ main() {
     'apples'
   };
 
+  setOfFruitss.add('mangoes');
+
   setOfFruits.add('mangoes');
   setOfFruits.addAll({'cashews', 'oranges', 'lemons'});
 
+  print(setOfFruitss);
   print(setOfFruits);
-  print('the lenght is ${setOfFruits.length}');
+  print('the lenght of setOfFruitss is ${setOfFruitss.length}');
+  print('the lenght of setOfFruits is ${setOfFruits.length}');
 
   // contains or containsAll
   print('the set contains ${setOfFruits.contains('mangoes')}');

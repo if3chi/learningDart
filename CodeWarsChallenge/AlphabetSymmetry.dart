@@ -12,6 +12,8 @@ See test cases for more examples.
 
 Input will consist of alphabet characters, both uppercase and lowercase. No 
 spaces. 
+
+https://www.codewars.com/kata/59d9ff9f7905dfeed50000b0/
 */
 
 List<int> solve(List<String> arr) {
@@ -33,5 +35,5 @@ List<int> solve(List<String> arr) {
 }
 
 main() {
-  print(solve(["abode", "ABc", "xyzD"]));
+  print(solve(["abode", "ABc", "xyzDefguijkl"]));
 }

@@ -6,12 +6,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
           home: Scaffold(
-        backgroundColor: Colors.teal.shade900,
+        backgroundColor: Colors.blueGrey.shade400,
         body: SafeArea(
             child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircleAvatar(
-              radius: 110,
+              radius: 80,
               backgroundColor: Colors.amberAccent,
               backgroundImage: AssetImage('img/avatar.jpg'),
             ),
@@ -33,56 +34,48 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
+            SizedBox(
+              height: 20,
+              width: 200,
+              child: Divider(
+                thickness: 3,
+                color: Colors.white,
+              ),
+            ),
+            Card(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Icon(
+              child: ListTile(
+                  leading: Icon(
                     Icons.phone,
                     // size: 25,
                     color: Colors.teal.shade900,
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
+                  title: Text(
                     '055 805 5070',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.teal.shade600,
                       fontFamily: 'SourceSansPro',
                     ),
-                  )
-                ],
-              ),
+                  )),
             ),
-            Container(
-              padding: EdgeInsets.all(10),
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-              color: Colors.white,
-              child: Row(
-                children: [
-                  Icon(
+            Card(
+                margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                child: ListTile(
+                  leading: Icon(
                     Icons.email,
                     // size: 25,
                     color: Colors.teal.shade900,
                   ),
-                  SizedBox(
-                    width: 20,
-                  ),
-                  Text(
+                  title: Text(
                     'ifechi@abc.com',
                     style: TextStyle(
                       fontSize: 30,
                       color: Colors.teal.shade600,
                       fontFamily: 'SourceSansPro',
                     ),
-                  )
-                ],
-              ),
-            )
+                  ),
+                ))
           ],
         )),
       ));

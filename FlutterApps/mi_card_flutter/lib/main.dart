@@ -6,40 +6,84 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) => MaterialApp(
           home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal.shade900,
         body: SafeArea(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                color: Colors.redAccent,
-                width: 100,
-                height: double.infinity,
+            child: Column(
+          children: [
+            CircleAvatar(
+              radius: 110,
+              backgroundColor: Colors.amberAccent,
+              backgroundImage: AssetImage('img/avatar.jpg'),
+            ),
+            Text(
+              'Jaspar Ifechi',
+              style: TextStyle(
+                  fontSize: 55,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Pacifico'),
+            ),
+            Text(
+              'Developer & Fashion Designer',
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.white,
+                fontFamily: 'SourceSansPro',
+                letterSpacing: 2.5,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 40.0),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              color: Colors.white,
+              child: Row(
                 children: [
-                  Container(
-                    color: Colors.yellow,
-                    width: 100,
-                    height: 100,
+                  Icon(
+                    Icons.phone,
+                    // size: 25,
+                    color: Colors.teal.shade900,
                   ),
-                  Container(
-                    color: Colors.green,
-                    width: 100,
-                    height: 100,
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    '055 805 5070',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.teal.shade600,
+                      fontFamily: 'SourceSansPro',
+                    ),
                   )
                 ],
               ),
-              SizedBox(width: 40.0),
-              Container(
-                color: Colors.blue,
-                width: 100,
-                height: double.infinity,
+            ),
+            Container(
+              padding: EdgeInsets.all(10),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+              color: Colors.white,
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.email,
+                    // size: 25,
+                    color: Colors.teal.shade900,
+                  ),
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Text(
+                    'ifechi@abc.com',
+                    style: TextStyle(
+                      fontSize: 30,
+                      color: Colors.teal.shade600,
+                      fontFamily: 'SourceSansPro',
+                    ),
+                  )
+                ],
               ),
-            ],
-          ),
-        ),
+            )
+          ],
+        )),
       ));
 }

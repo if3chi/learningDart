@@ -1,75 +1,45 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MyApp());
-}
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.yellow,
+  Widget build(BuildContext context) => MaterialApp(
+          home: Scaffold(
+        backgroundColor: Colors.teal,
         body: SafeArea(
-            child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
-          // mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Container(
-                  color: Colors.green,
-                  width: 100.0,
-                  height: 100.0,
-                ),
-                Container(
-                  decoration: BoxDecoration(color: Colors.white),
-                  width: 100.0,
-                  height: 100.0,
-                ),
-                Container(
-                  color: Colors.green,
-                  width: 100.0,
-                  height: 100.0,
-                )
-              ],
-            ),
-            Container(
-              color: Colors.grey,
-              child: Text(
-                "Ifechi",
-                style: TextStyle(fontSize: 90, color: Colors.white),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                color: Colors.redAccent,
+                width: 100,
+                height: double.infinity,
               ),
-            ),
-            Container(
-              color: Colors.blue,
-              child: Text(
-                "Ifechi",
-                style: TextStyle(fontSize: 90, color: Colors.white),
+              SizedBox(width: 40.0),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    color: Colors.yellow,
+                    width: 100,
+                    height: 100,
+                  ),
+                  Container(
+                    color: Colors.green,
+                    width: 100,
+                    height: 100,
+                  )
+                ],
               ),
-            ),
-            Container(
-              color: Colors.green,
-              child: Text(
-                "Ifechi",
-                style: TextStyle(fontSize: 90, color: Colors.white),
+              SizedBox(width: 40.0),
+              Container(
+                color: Colors.blue,
+                width: 100,
+                height: double.infinity,
               ),
-            ),
-            Container(
-              color: Colors.black12,
-              child: Text(
-                "Ifechi",
-                style: TextStyle(fontSize: 90, color: Colors.white),
-              ),
-            ),
-          ],
-        )),
-      ),
-    );
-  }
+            ],
+          ),
+        ),
+      ));
 }

@@ -28,4 +28,4 @@ flutter:
   fonts:
     - family: Nunito
       fonts:
-        - asset: fonts/
+        - asset: fonts/Nunito-Black.ttf

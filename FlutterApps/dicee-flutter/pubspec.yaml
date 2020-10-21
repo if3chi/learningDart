@@ -22,3 +22,12 @@ flutter:
 
   assets:
   - images/
+
+  fonts:
+    - family: Mulish-Black
+      fonts:
+        - asset: fonts/Mulish-Black.ttf
+
+    - family: Mulish-Reg
+      fonts:
+        - asset: fonts/Mulish-Regular.ttf

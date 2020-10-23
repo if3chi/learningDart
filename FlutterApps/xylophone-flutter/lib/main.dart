@@ -6,7 +6,7 @@ void main() => runApp(XylophoneApp());
 class XylophoneApp extends StatelessWidget {
   final player = AudioCache();
 
-  Widget displatBtn(int soundNum, Color color) {
+  Widget displatBtn({int soundNum, Color color, String text}) {
     return Expanded(
       child: TextButton(
         style: ButtonStyle(
@@ -15,7 +15,14 @@ class XylophoneApp extends StatelessWidget {
         onPressed: () {
           player.play('note$soundNum.wav');
         },
-        child: null,
+        child: Text(
+          text,
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            color: Color(0xffffffff),
+          ),
+        ),
       ),
     );
   }
@@ -29,13 +36,14 @@ class XylophoneApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              displatBtn(1, Colors.red),
-              displatBtn(2, Colors.orange),
-              displatBtn(3, Colors.yellow),
-              displatBtn(4, Colors.blue),
-              displatBtn(5, Colors.green),
-              displatBtn(6, Colors.teal),
-              displatBtn(7, Colors.purple),
+              displatBtn(soundNum: 1, color: Colors.red, text: 'DO'),
+              displatBtn(soundNum: 2, color: Colors.orange, text: 'RE'),
+              displatBtn(soundNum: 3, color: Colors.yellow, text: 'MI'),
+              displatBtn(soundNum: 4, color: Colors.green, text: 'FA'),
+              displatBtn(soundNum: 5, color: Colors.teal, text: 'SO'),
+              displatBtn(
+                  soundNum: 6, color: Colors.purple.shade600, text: 'LA'),
+              displatBtn(soundNum: 7, color: Colors.blue, text: 'TI'),
             ],
           ),
         ),

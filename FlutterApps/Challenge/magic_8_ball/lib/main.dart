@@ -29,16 +29,14 @@ class Ball extends StatefulWidget {
 class _BallPageState extends State<Ball> {
   int ballNum = 1;
   Widget build(BuildContext context) => Center(
-        child: Container(
-          child: TextButton(
-            onPressed: () {
-              setState(() {
-                ballNum = Random().nextInt(5) + 1;
-              });
-            },
-            child: Expanded(
-              child: Image.asset('images/ball$ballNum.png'),
-            ),
+        child: TextButton(
+          onPressed: () {
+            setState(() {
+              ballNum = Random().nextInt(5) + 1;
+            });
+          },
+          child: Expanded(
+            child: Image.asset('images/ball$ballNum.png'),
           ),
         ),
       );

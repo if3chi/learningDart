@@ -29,6 +29,7 @@ class QuizPage extends StatefulWidget {
 
 class _QuizPageState extends State<QuizPage> {
   List<Icon> mark = [];
+  int scoreCount = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -104,7 +105,11 @@ class _QuizPageState extends State<QuizPage> {
     bool ans = quizMain.getAnswer();
     setState(() {
       if (quizMain.isFinished()) {
-        Alert(context: context, title: "Quiz", desc: "End of Quiz").show();
+        Alert(
+                context: context,
+                title: "Quiz",
+                desc: "End of Quiz\nScored $scoreCount/${mark.length}")
+            .show();
         mark.clear();
         quizMain.resetQuiz();
       } else {
@@ -113,6 +118,7 @@ class _QuizPageState extends State<QuizPage> {
             Icons.check,
             color: Colors.green,
           ));
+          scoreCount++;
         } else {
           mark.add(Icon(
             Icons.close,

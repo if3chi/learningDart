@@ -1,5 +1,3 @@
-import 'package:rflutter_alert/rflutter_alert.dart';
-
 import 'question.dart';
 
 class QuizMain {

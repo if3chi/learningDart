@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:quizzler/quiz_main.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 final quizMain = QuizMain();
 void main() => runApp(Quizzler());
@@ -102,19 +103,25 @@ class _QuizPageState extends State<QuizPage> {
   void checkAnswer(bool userAns) {
     bool ans = quizMain.getAnswer();
     setState(() {
-      if (ans == userAns) {
-        mark.add(Icon(
-          Icons.check,
-          color: Colors.green,
-        ));
+      if (quizMain.isFinished()) {
+        Alert(context: context, title: "Quiz", desc: "End of Quiz").show();
+        mark.clear();
+        quizMain.resetQuiz();
       } else {
-        mark.add(Icon(
-          Icons.close,
-          color: Colors.red,
-        ));
-      }
+        if (ans == userAns) {
+          mark.add(Icon(
+            Icons.check,
+            color: Colors.green,
+          ));
+        } else {
+          mark.add(Icon(
+            Icons.close,
+            color: Colors.red,
+          ));
+        }
 
-      quizMain.getNextQtn();
+        quizMain.getNextQtn();
+      }
     });
   }
 }

@@ -1,7 +1,13 @@
+import 'package:rflutter_alert/rflutter_alert.dart';
+
 import 'question.dart';
 
 class QuizMain {
   int _questionNumber = 0;
+
+  // QuizMain(int qNum) {
+  //   _questionNumber = qNum;
+  // }
 
   List<Question> _questionDepo = [
     Question('You can lead a cow down stairs but not up stairs.', false),
@@ -40,5 +46,11 @@ class QuizMain {
     if (_questionNumber < _questionDepo.length - 1) {
       _questionNumber++;
     }
+  }
+
+  bool isFinished() =>
+      (_questionNumber >= _questionDepo.length - 1) ? true : false;
+  void resetQuiz() {
+    _questionNumber = 0;
   }
 }

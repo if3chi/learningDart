@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quizzler/quiz_main.dart';
 
+final quizMain = QuizMain();
 void main() => runApp(Quizzler());
 
 class Quizzler extends StatelessWidget {
@@ -25,6 +27,7 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> mark = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -37,7 +40,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                quizMain.getQuestion(),
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -62,6 +65,7 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked true.
+                checkAnswer(true);
               },
             ),
           ),
@@ -80,13 +84,38 @@ class _QuizPageState extends State<QuizPage> {
               ),
               onPressed: () {
                 //The user picked false.
+                checkAnswer(false);
               },
             ),
           ),
         ),
-        //TODO: Add a Row here as your score keeper
+        Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            children: mark,
+          ),
+        ),
       ],
     );
+  }
+
+  void checkAnswer(bool userAns) {
+    bool ans = quizMain.getAnswer();
+    setState(() {
+      if (ans == userAns) {
+        mark.add(Icon(
+          Icons.check,
+          color: Colors.green,
+        ));
+      } else {
+        mark.add(Icon(
+          Icons.close,
+          color: Colors.red,
+        ));
+      }
+
+      quizMain.getNextQtn();
+    });
   }
 }
 

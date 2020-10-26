@@ -1,5 +1,4 @@
-import 'package:bmi_calculator/widgets/card_content.dart';
-import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:bmi_calculator/widgets/reusable_widgets.dart';
 import 'package:bmi_calculator/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,6 +13,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 120;
+  int weight = 65;
+  int age = 65;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,12 @@ class _InputPageState extends State<InputPage> {
                     cardColor: selectedGender == Gender.male
                         ? kActiveCardColor
                         : kInActiveCardColor,
-                    cardChild:
-                        CardContent(icon: FontAwesomeIcons.mars, label: 'MALE'),
+                    cardChild: CardContent(
+                        icon: FontAwesomeIcons.mars,
+                        iconColor: selectedGender == Gender.male
+                            ? Colors.white
+                            : kGreyColor,
+                        label: 'MALE'),
                   ),
                 ),
                 Expanded(
@@ -54,6 +59,9 @@ class _InputPageState extends State<InputPage> {
                           : kInActiveCardColor,
                       cardChild: CardContent(
                         icon: FontAwesomeIcons.venus,
+                        iconColor: selectedGender == Gender.female
+                            ? Colors.white
+                            : kGreyColor,
                         label: 'FEMALE',
                       ),
                     ),
@@ -76,22 +84,14 @@ class _InputPageState extends State<InputPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.baseline,
                     children: [
-                      Text(
-                        '$height',
-                        style: kLabelIcon,
-                      ),
-                      Text(
-                        'cm',
-                        style: kLabelStyle,
-                      )
+                      Text('$height', style: kLabelIcon),
+                      Text('cm', style: kLabelStyle)
                     ],
                   ),
                   Slider(
                     value: height.toDouble(),
                     min: 40.0,
                     max: 200.0,
-                    activeColor: kBottomCardColor,
-                    inactiveColor: kGreyColor,
                     onChanged: (double heightChanged) {
                       setState(() {
                         height = heightChanged.round();
@@ -105,15 +105,90 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: [
-                Expanded(child: ReusableCard(cardColor: kActiveCardColor)),
-                Expanded(child: ReusableCard(cardColor: kActiveCardColor)),
+                Expanded(
+                    child: ReusableCard(
+                  cardColor: kActiveCardColor,
+                  cardChild: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('WEIGHT', style: kLabelStyle),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: [
+                          Text('$weight', style: kLabelIcon),
+                          Text('kg', style: kLabelStyle),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundBtn(
+                            icon: FontAwesomeIcons.minus,
+                            onTouch: () {
+                              setState(() {
+                                if (weight > 40) {
+                                  --weight;
+                                }
+                              });
+                            },
+                          ),
+                          SizedBox(width: 10.0),
+                          RoundBtn(
+                            icon: FontAwesomeIcons.plus,
+                            onTouch: () {
+                              setState(() {
+                                if (weight < 256) {
+                                  ++weight;
+                                }
+                              });
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                )),
+                Expanded(
+                  child: ReusableCard(
+                    cardColor: kActiveCardColor,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('AGE', style: kLabelStyle),
+                        Text('$age', style: kLabelIcon),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RoundBtn(
+                              icon: FontAwesomeIcons.minus,
+                              onTouch: () {
+                                setState(() {
+                                  age--;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 10.0),
+                            RoundBtn(
+                                icon: FontAwesomeIcons.plus,
+                                onTouch: () {
+                                  setState(() {
+                                    age++;
+                                  });
+                                }),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
           Container(
             height: kBottomContainerHeight,
             width: double.infinity,
-            color: kBottomCardColor,
+            color: kPinkColor,
             margin: EdgeInsets.only(top: 15.0),
           )
         ],

@@ -185,13 +185,34 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          Container(
-            height: kBottomContainerHeight,
-            width: double.infinity,
-            color: kPinkColor,
-            margin: EdgeInsets.only(top: 15.0),
-          )
+          BottomBtn()
         ],
+      ),
+    );
+  }
+}
+
+class BottomBtn extends StatelessWidget {
+  const BottomBtn({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        print('btn pressed');
+      },
+      child: Container(
+        alignment: Alignment.center,
+        height: kBottomContainerHeight,
+        width: double.infinity,
+        color: kPinkColor,
+        margin: EdgeInsets.only(top: 15.0),
+        child: Text(
+          'CALCULATE',
+          style: kBottomBtnLabel,
+        ),
       ),
     );
   }

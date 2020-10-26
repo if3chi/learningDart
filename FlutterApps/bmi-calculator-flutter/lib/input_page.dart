@@ -1,8 +1,10 @@
+import 'package:bmi_calculator/widgets/card_content.dart';
+import 'package:bmi_calculator/widgets/reusable_card.dart';
+import 'package:bmi_calculator/widgets/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-const activeCardColor = Color(0xff1e1e33);
-const bottomContainerHeight = 80.0;
-const bottomCardColor = Color(0xffeb1555);
+enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
   @override
@@ -10,6 +12,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender selectedGender;
+  int height = 120;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,93 +22,101 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
             child: Row(
               children: [
-                ReusableCard(
-                  cardColor: activeCardColor,
-                  cardChild:
-                      CardContent(icon: Icons.ac_unit_rounded, text: 'MALE'),
+                Expanded(
+                  child: ReusableCard(
+                    onTouch: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    cardColor: selectedGender == Gender.male
+                        ? kActiveCardColor
+                        : kInActiveCardColor,
+                    cardChild:
+                        CardContent(icon: FontAwesomeIcons.mars, label: 'MALE'),
+                  ),
                 ),
-                ReusableCard(
-                  cardColor: activeCardColor,
-                  cardChild: CardContent(
-                    icon: Icons.access_alarm_sharp,
-                    text: 'FEMALE',
+                Expanded(
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: ReusableCard(
+                      cardColor: selectedGender == Gender.female
+                          ? kActiveCardColor
+                          : kInActiveCardColor,
+                      cardChild: CardContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMALE',
+                      ),
+                    ),
                   ),
                 ),
               ],
             ),
           ),
-          ReusableCard(cardColor: activeCardColor),
+          Expanded(
+            child: ReusableCard(
+              cardColor: kActiveCardColor,
+              cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'HEIGHT',
+                    style: kLabelStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    children: [
+                      Text(
+                        '$height',
+                        style: kLabelIcon,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelStyle,
+                      )
+                    ],
+                  ),
+                  Slider(
+                    value: height.toDouble(),
+                    min: 40.0,
+                    max: 200.0,
+                    activeColor: kBottomCardColor,
+                    inactiveColor: kGreyColor,
+                    onChanged: (double heightChanged) {
+                      setState(() {
+                        height = heightChanged.round();
+                      });
+                    },
+                  )
+                ],
+              ),
+            ),
+          ),
           Expanded(
             child: Row(
               children: [
-                ReusableCard(cardColor: activeCardColor),
-                ReusableCard(cardColor: activeCardColor),
+                Expanded(child: ReusableCard(cardColor: kActiveCardColor)),
+                Expanded(child: ReusableCard(cardColor: kActiveCardColor)),
               ],
             ),
           ),
           Container(
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
             width: double.infinity,
-            color: bottomCardColor,
+            color: kBottomCardColor,
             margin: EdgeInsets.only(top: 15.0),
           )
         ],
-      ),
-    );
-  }
-}
-
-class CardContent extends StatelessWidget {
-  final icon;
-  final text;
-
-  CardContent({@required this.icon, @required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 80.0,
-        ),
-        SizedBox(
-          height: 15.0,
-        ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: 18.0,
-            color: Color(0xff8d8e98),
-            fontWeight: FontWeight.bold,
-            letterSpacing: 2.0,
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color cardColor;
-  final cardChild;
-  ReusableCard({@required this.cardColor, this.cardChild});
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(15.0),
-        decoration: BoxDecoration(
-          color: cardColor,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: cardChild,
       ),
     );
   }

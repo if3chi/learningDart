@@ -80,3 +80,28 @@ class RoundBtn extends StatelessWidget {
     );
   }
 }
+
+// Bottom Button
+class BottomBtn extends StatelessWidget {
+  final Function onTouch;
+  final String label;
+  const BottomBtn({this.onTouch, this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTouch,
+      child: Container(
+        alignment: Alignment.center,
+        height: kBottomContainerHeight,
+        width: double.infinity,
+        color: kPinkColor,
+        margin: EdgeInsets.only(top: 15.0),
+        child: Text(
+          label,
+          style: kBottomBtnLabel,
+        ),
+      ),
+    );
+  }
+}

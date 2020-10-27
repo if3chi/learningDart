@@ -1,3 +1,5 @@
+import 'package:bmi_calculator/calculator_bmi.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:bmi_calculator/widgets/reusable_widgets.dart';
 import 'package:bmi_calculator/widgets/constants.dart';
 import 'package:flutter/material.dart';
@@ -12,15 +14,16 @@ class InputPage extends StatefulWidget {
 
 class _InputPageState extends State<InputPage> {
   Gender selectedGender;
-  int height = 120;
+  int height = 176;
   int weight = 65;
-  int age = 65;
+  int age = 29;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('BMI CALCULATOR'),
+        toolbarHeight: 90.0,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -185,34 +188,25 @@ class _InputPageState extends State<InputPage> {
               ],
             ),
           ),
-          BottomBtn()
+          BottomBtn(
+            onTouch: () {
+              CalculateBMI calcBMI =
+                  CalculateBMI(height: height, weight: weight);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ResultPage(
+                    resultFig: calcBMI.calc(),
+                    result: calcBMI.getResult(),
+                    resultDescription: calcBMI.getDesc(),
+                    resultColor: calcBMI.getColor(),
+                  ),
+                ),
+              );
+            },
+            label: 'CALCULATE',
+          ),
         ],
-      ),
-    );
-  }
-}
-
-class BottomBtn extends StatelessWidget {
-  const BottomBtn({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print('btn pressed');
-      },
-      child: Container(
-        alignment: Alignment.center,
-        height: kBottomContainerHeight,
-        width: double.infinity,
-        color: kPinkColor,
-        margin: EdgeInsets.only(top: 15.0),
-        child: Text(
-          'CALCULATE',
-          style: kBottomBtnLabel,
-        ),
       ),
     );
   }

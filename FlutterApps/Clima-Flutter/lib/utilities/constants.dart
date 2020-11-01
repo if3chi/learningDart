@@ -7,7 +7,7 @@ const kTempTextStyle = TextStyle(
 
 const kMessageTextStyle = TextStyle(
   fontFamily: 'Spartan MB',
-  fontSize: 60.0,
+  fontSize: 50.0,
 );
 
 const kButtonTextStyle = TextStyle(
@@ -16,5 +16,23 @@ const kButtonTextStyle = TextStyle(
 );
 
 const kConditionTextStyle = TextStyle(
-  fontSize: 20.0,
+  fontSize: 90.0,
+);
+
+const kTextField = InputDecoration(
+  hintText: 'Enter City Name',
+  hintStyle: TextStyle(color: Colors.black45),
+  filled: true,
+  fillColor: Colors.white54,
+  icon: Icon(
+    Icons.location_city_outlined,
+    color: Colors.white,
+    size: 35,
+  ),
+  border: OutlineInputBorder(
+    borderRadius: BorderRadius.all(
+      Radius.circular(20.0),
+    ),
+    borderSide: BorderSide.none,
+  ),
 );

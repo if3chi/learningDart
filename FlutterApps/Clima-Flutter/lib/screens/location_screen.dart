@@ -3,7 +3,7 @@ import 'package:clima/utilities/constants.dart';
 import 'package:clima/services/weather.dart';
 
 class LocationScreen extends StatefulWidget {
-  final Map locationWeatherData;
+  final dynamic locationWeatherData;
 
   LocationScreen({this.locationWeatherData});
   @override
@@ -11,6 +11,8 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  WeatherModel wModel = WeatherModel();
+
   int temp;
   String cityName;
   String weatherIcon;
@@ -22,9 +24,14 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   void updateUI(Map locationWeatherData) {
-    WeatherModel wModel = WeatherModel();
-
     setState(() {
+      if (locationWeatherData == null) {
+        temp = 0;
+        weatherIcon = 'Error';
+        weatherMsg = 'Unable to get Weather data!';
+        cityName = '';
+        return;
+      }
       weatherIcon =
           wModel.getWeatherIcon(locationWeatherData['weather'][0]['id']);
       temp = locationWeatherData['main']['temp'].toInt();
@@ -55,7 +62,10 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await wModel.getCurrentData();
+                      updateUI(weatherData);
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,

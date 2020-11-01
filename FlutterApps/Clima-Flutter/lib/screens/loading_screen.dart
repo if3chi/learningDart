@@ -25,24 +25,22 @@ class _LoadingScreenState extends State<LoadingScreen> {
     double lon = location.longitude;
     double lat = location.latitude;
     String url =
-        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$_apiKey';
+        'https://api.openweathermap.org/data/2.5/weather?lat=$lat&lon=$lon&appid=$_apiKey&units=metric';
 
     Map weatherData = await NetworkHelper(url).getUrlData();
 
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) {
-        return LocationScreen();
+        return LocationScreen(
+          locationWeatherData: weatherData,
+        );
       }),
     );
 
     // double temp = weatherData['main']['temp'];
     // int condition = weatherData['weather'][0]['id'];
     // String cityName = weatherData['name'];
-
-    // print(temp);
-    // print(condition);
-    // print(cityName);
   }
 
   @override

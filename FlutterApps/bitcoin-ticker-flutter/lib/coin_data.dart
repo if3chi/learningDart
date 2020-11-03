@@ -35,9 +35,10 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  Future<dynamic> getCoinData() {
-    var xRate = NetworkHelper('$_baseUrl${cryptoList[0]}/USD?apikey=$_api$_key')
-        .getUrlData();
+  Future<dynamic> getCoinData(String currency) {
+    var xRate =
+        NetworkHelper('$_baseUrl${cryptoList[0]}/$currency?apikey=$_api$_key')
+            .getUrlData();
     return xRate;
   }
 }

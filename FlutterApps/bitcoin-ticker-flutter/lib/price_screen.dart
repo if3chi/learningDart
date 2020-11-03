@@ -17,17 +17,19 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    updateRates();
+    updateRates(selectedCurrency);
   }
 
-  void updateRates() async {
-    var xRate = await CoinData().getCoinData();
+  void updateRates(String currencySelected) async {
+    var xRate = await CoinData().getCoinData(currencySelected);
     setState(() {
       cBase = xRate['asset_id_base'];
       cQoute = xRate['asset_id_quote'];
       rate = xRate['rate'].toInt();
     });
   }
+
+  // void getCurrencyRate(String currencySelected) {}
 
   DropdownButton<String> androidDropdown() {
     List<DropdownMenuItem<String>> dropdownMenuItems = [];
@@ -46,6 +48,7 @@ class _PriceScreenState extends State<PriceScreen> {
       items: dropdownMenuItems,
       onChanged: (value) => setState(() {
         selectedCurrency = value;
+        updateRates(selectedCurrency);
       }),
     );
   }
@@ -59,7 +62,8 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       backgroundColor: Colors.lightBlue,
       itemExtent: 52,
-      onSelectedItemChanged: (selectedItemIndex) => print(selectedItemIndex),
+      onSelectedItemChanged: (selectedItemIndex) =>
+          updateRates(currenciesList[selectedItemIndex]),
       children: pickerItems,
     );
   }
@@ -85,7 +89,10 @@ class _PriceScreenState extends State<PriceScreen> {
               child: Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
-                  '1 ${cBase ?? 'BTC'} = ${rate ?? '?'} ${cQoute ?? 'USD'}',
+                  // '1 ${cBase ?? 'BTC'} = ${rate ?? '?'} ${cQoute ?? selectedCurrency}',
+                  cBase == null
+                      ? 'Loading rates..'
+                      : '1 $cBase = $rate $cQoute',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 20.0,

@@ -1,3 +1,9 @@
+import 'package:bitcoin_ticker/services/networking.dart';
+
+const _api = '69BCE436-7CEE-48';
+const _key = '13-83ED-E0BB359E135A';
+const _baseUrl = 'https://rest.coinapi.io/v1/exchangerate/';
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -29,5 +35,9 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  getCurrency() => currenciesList;
+  Future<dynamic> getCoinData() {
+    var xRate = NetworkHelper('$_baseUrl${cryptoList[0]}/USD?apikey=$_api$_key')
+        .getUrlData();
+    return xRate;
+  }
 }

@@ -17,11 +17,11 @@ class _PriceScreenState extends State<PriceScreen> {
   @override
   void initState() {
     super.initState();
-    updateRates(selectedCurrency);
+    updateRates();
   }
 
-  void updateRates(String currencySelected) async {
-    var xRate = await CoinData().getCoinData(currencySelected);
+  void updateRates() async {
+    var xRate = await CoinData().getCoinData(selectedCurrency);
     setState(() {
       cBase = xRate['asset_id_base'];
       cQoute = xRate['asset_id_quote'];
@@ -48,7 +48,7 @@ class _PriceScreenState extends State<PriceScreen> {
       items: dropdownMenuItems,
       onChanged: (value) => setState(() {
         selectedCurrency = value;
-        updateRates(selectedCurrency);
+        updateRates();
       }),
     );
   }
@@ -62,8 +62,10 @@ class _PriceScreenState extends State<PriceScreen> {
     return CupertinoPicker(
       backgroundColor: Colors.lightBlue,
       itemExtent: 52,
-      onSelectedItemChanged: (selectedItemIndex) =>
-          updateRates(currenciesList[selectedItemIndex]),
+      onSelectedItemChanged: (selectedItemIndex) {
+        selectedCurrency = currenciesList[selectedItemIndex];
+        updateRates();
+      },
       children: pickerItems,
     );
   }

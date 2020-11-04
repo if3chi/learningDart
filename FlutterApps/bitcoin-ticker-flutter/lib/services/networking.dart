@@ -15,6 +15,6 @@ class NetworkHelper {
       return jsonDecode(response.body);
     }
 
-    return response.statusCode;
+    return jsonDecode(response.body);
   }
 }

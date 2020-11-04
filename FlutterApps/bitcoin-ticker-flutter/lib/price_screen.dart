@@ -9,9 +9,9 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
-  String cBase;
-  String cQoute;
-  int rate;
+  int btcRate;
+  int ethRate;
+  int ltcRate;
   String selectedCurrency = currenciesList[0];
 
   @override
@@ -21,12 +21,21 @@ class _PriceScreenState extends State<PriceScreen> {
   }
 
   void updateRates() async {
-    var xRate = await CoinData().getCoinData(selectedCurrency);
-    setState(() {
-      cBase = xRate['asset_id_base'];
-      cQoute = xRate['asset_id_quote'];
-      rate = xRate['rate'].toInt();
-    });
+    try {
+      var xRate = await CoinData().getCoinData(selectedCurrency);
+
+      setState(() {
+        if (xRate.length == 3) {
+          btcRate = xRate[0];
+          ethRate = xRate[1];
+          ltcRate = xRate[2];
+        } else {
+          print(xRate[0]);
+        }
+      });
+    } catch (e) {
+      print(e);
+    }
   }
 
   // void getCurrencyRate(String currencySelected) {}
@@ -80,29 +89,13 @@ class _PriceScreenState extends State<PriceScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Padding(
-            padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
-            child: Card(
-              color: Colors.lightBlueAccent,
-              elevation: 5.0,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
-                child: Text(
-                  // '1 ${cBase ?? 'BTC'} = ${rate ?? '?'} ${cQoute ?? selectedCurrency}',
-                  cBase == null
-                      ? 'Loading rates..'
-                      : '1 $cBase = $rate $cQoute',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              RatePad(cBase: 'BTC', rate: btcRate, cQoute: selectedCurrency),
+              RatePad(cBase: 'ETH', rate: ethRate, cQoute: selectedCurrency),
+              RatePad(cBase: 'LTC', rate: ltcRate, cQoute: selectedCurrency),
+            ],
           ),
           Container(
             height: 150.0,
@@ -112,6 +105,44 @@ class _PriceScreenState extends State<PriceScreen> {
             child: Platform.isIOS ? iosPicker() : androidDropdown(),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class RatePad extends StatelessWidget {
+  const RatePad({
+    @required this.cBase,
+    @required this.rate,
+    @required this.cQoute,
+  });
+
+  final String cBase;
+  final int rate;
+  final String cQoute;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+      child: Card(
+        color: Colors.lightBlueAccent,
+        elevation: 5.0,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
+          child: Text(
+            // '1 ${cBase ?? 'BTC'} = ${rate ?? '?'} ${cQoute ?? selectedCurrency}',
+            rate == null ? 'Loading rates..' : '1 $cBase = $rate $cQoute',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
     );
   }

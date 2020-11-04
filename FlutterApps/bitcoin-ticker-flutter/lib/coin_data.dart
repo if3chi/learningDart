@@ -1,7 +1,11 @@
 import 'package:bitcoin_ticker/services/networking.dart';
 
-const _api = '69BCE436-7CEE-48';
-const _key = '13-83ED-E0BB359E135A';
+// const _api = '69BCE436-7CEE-4813';
+// const _key = '83ED-E0BB359E135A';
+
+const _api = 'A989451A-14C5-4DDC';
+const _key = '9D83-96628715BB4E';
+
 const _baseUrl = 'https://rest.coinapi.io/v1/exchangerate/';
 
 const List<String> currenciesList = [
@@ -35,10 +39,32 @@ const List<String> cryptoList = [
 ];
 
 class CoinData {
-  Future<dynamic> getCoinData(String currency) {
-    var xRate =
-        NetworkHelper('$_baseUrl${cryptoList[0]}/$currency?apikey=$_api$_key')
-            .getUrlData();
-    return xRate;
+  Future getCoinData(String currency) async {
+    var rates = [];
+    err:
+    for (var base in cryptoList) {
+      var xRate =
+          await NetworkHelper('$_baseUrl$base/$currency?apikey=$_api-$_key')
+              .getUrlData();
+      if (xRate.containsKey('error')) {
+        rates.add(xRate['error']);
+        break err;
+      }
+      rates.add(xRate['rate'].toInt());
+    }
+
+    return rates;
   }
+
+  // Future getBaseRates(String currency) async {
+  //   var price;
+  //   for (var base in cryptoList) {
+  //     price = await NetworkHelper('$_baseUrl$base/$currency?apikey=$_api$_key')
+  //         .getUrlData();
+  //     rates.add(
+  //         {'cBase': base, 'rate': price['rate'].toInt(), 'cQoute': currency});
+  //   }
+  //   print(rates);
+  //   return rates;
+  // }
 }

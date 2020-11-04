@@ -1,10 +1,10 @@
 import 'package:bitcoin_ticker/services/networking.dart';
 
-// const _api = '69BCE436-7CEE-4813';
-// const _key = '83ED-E0BB359E135A';
+const _api = '69BCE436-7CEE-4813';
+const _key = '83ED-E0BB359E135A';
 
-const _api = 'A989451A-14C5-4DDC';
-const _key = '9D83-96628715BB4E';
+// const _api = 'A989451A-14C5-4DDC';
+// const _key = '9D83-96628715BB4E';
 
 const _baseUrl = 'https://rest.coinapi.io/v1/exchangerate/';
 
@@ -55,16 +55,4 @@ class CoinData {
 
     return rates;
   }
-
-  // Future getBaseRates(String currency) async {
-  //   var price;
-  //   for (var base in cryptoList) {
-  //     price = await NetworkHelper('$_baseUrl$base/$currency?apikey=$_api$_key')
-  //         .getUrlData();
-  //     rates.add(
-  //         {'cBase': base, 'rate': price['rate'].toInt(), 'cQoute': currency});
-  //   }
-  //   print(rates);
-  //   return rates;
-  // }
 }

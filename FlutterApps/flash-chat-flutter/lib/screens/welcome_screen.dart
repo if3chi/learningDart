@@ -80,14 +80,14 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                 Navigator.pushNamed(context, LoginScreen.id);
               },
               btnColor: Colors.lightBlueAccent,
-              btnChild: 'Log In',
+              btnTitle: 'Log In',
             ),
             AppBtn(
               onTap: () {
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },
               btnColor: Colors.blueAccent,
-              btnChild: 'Register',
+              btnTitle: 'Register',
             ),
           ],
         ),

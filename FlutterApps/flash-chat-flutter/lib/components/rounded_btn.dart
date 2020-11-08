@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class AppBtn extends StatelessWidget {
   final Function onTap;
-  final String btnChild;
+  final String btnTitle;
   final Color btnColor;
 
-  AppBtn({this.onTap, this.btnColor, this.btnChild});
+  AppBtn({this.onTap, this.btnColor, this.btnTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,10 @@ class AppBtn extends StatelessWidget {
           minWidth: 200.0,
           height: 42.0,
           child: Text(
-            btnChild,
+            btnTitle,
+            style: TextStyle(
+              color: Colors.white,
+            ),
           ),
         ),
       ),

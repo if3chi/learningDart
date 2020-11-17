@@ -69,9 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               AppBtn(
                 onTap: () async {
-                  setState(() {
-                    isLoading = true;
-                  });
+                  buildSetState(true);
                   try {
                     final loggedIn = await _auth.signInWithEmailAndPassword(
                       email: email.trim(),
@@ -80,11 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     if (loggedIn != null) {
                       Navigator.pushNamed(context, ChatScreen.id);
+                      buildSetState(false);
                     }
                   } on FirebaseException catch (e) {
-                    setState(() {
-                      isLoading = false;
-                    });
+                    buildSetState(false);
                     print(e.code);
                     if (e.code == 'wrong-password') {
                       Alert(
@@ -110,5 +107,11 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void buildSetState(bool status) {
+    return setState(() {
+      isLoading = status;
+    });
   }
 }

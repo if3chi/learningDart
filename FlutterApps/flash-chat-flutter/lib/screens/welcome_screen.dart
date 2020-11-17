@@ -64,16 +64,18 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: myController.value,
                   ),
                 ),
-                TextLiquidFill(
-                  // speed: Duration(milliseconds: 500),
-                  // totalRepeatCount: 1,
-                  text: 'Flash Chat',
-                  waveColor: Colors.blue,
-                  boxBackgroundColor: Colors.white,
-                  boxWidth: 320,
-                  textStyle: TextStyle(
-                    fontSize: 50.0,
-                    fontWeight: FontWeight.w900,
+                Flexible(
+                  child: TextLiquidFill(
+                    // speed: Duration(milliseconds: 500),
+                    // totalRepeatCount: 1,
+                    text: 'Flash Chat',
+                    waveColor: Colors.blue,
+                    boxBackgroundColor: Colors.white,
+                    boxWidth: 320,
+                    textStyle: TextStyle(
+                      fontSize: 50.0,
+                      fontWeight: FontWeight.w900,
+                    ),
                   ),
                 ),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:todoey/components/list_card_widget.dart';
 import 'package:todoey/components/constants.dart';
+import 'package:todoey/components/task_list.dart';
 import 'package:todoey/screens/add_task_screen.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -54,7 +54,7 @@ class TasksScreen extends StatelessWidget {
             child: Container(
               padding: EdgeInsets.all(20),
               decoration: kBoxDecoration,
-              child: ListViewWidget(),
+              child: TaskList(),
             ),
           )
         ],
